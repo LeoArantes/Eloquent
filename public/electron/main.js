@@ -6,15 +6,19 @@ const isDev = require("electron-is-dev");
 
 require("@electron/remote/main").initialize();
 
+//process.env.NODE_ENV = "dev";
+
 let win = null;
 function createWindow() {
 	win = new BrowserWindow({
-		width: 1024,
-		minWidth: 1000,
-		height: 720,
-		minHeight: 660,
+		width: 		400,
+		minWidth: 	400,
+		height: 	526,
+		minHeight: 	526,
+		resizable: false,
 		backgroundColor: "#000",
 		show: false,
+		frame: false,
 		webPreferences: {
 			nodeIntegration: true,
 			preload: path.join(__dirname, "preload.js"),
@@ -22,11 +26,15 @@ function createWindow() {
 		},
 	});
 
-	//win.setMenu(null);
+	win.setMenu(null);
 
 	win.loadURL(
 		isDev ? "http://localhost:3000" : `file://${path.join(__dirname, "../../build/index.html")}`
 	);
+
+	if (process.env.NODE_ENV === "dev") {
+		win.webContents.openDevTools();
+	}
 
 	win.once("ready-to-show", () => {
 		win.show();

@@ -1,3 +1,9 @@
 {
-	"welcome": "Bem-vindo(a)"
+	"welcome": "Bem-vindo(a)",
+	"insertRoomCode": "Digite o número da sala",
+	"RoomCode": "Número da sala",
+	"RoomCodeError": "Número da sala inválido",
+	"Join": "Entrar",
+	"CreateRoom": "Criar sala",
+	"or": "ou"
 }

@@ -1,0 +1,22 @@
+export const FONTSIZE_5 = "20px";
+
+export const COLORS = {
+    ELOQUENT_ORANGE    : "#EF782E",
+    ELOQUENT_WHITE     : "#EBFEFF",
+    ELOQUENT_DARKBLUE  : "#07334B",
+    ELOQUENT_BLUE      : "#084465",
+    ELOQUENT_LIGHTBLUE : "#758BFD",
+    ELOQUENT_GRAY      : "#C4C4C4",
+    ELOQUENT_RED       : "#FF0000"
+}
+
+export const WINDOW_SIZES = {
+	LOGIN_WINDOW_WIDTH: 400,
+	LOGIN_WINDOW_HEIGHT: 526,
+	MAIN_WINDOW_WIDTH: 1386,
+	MAIN_WINDOW_HEIGHT: 724,
+};
+
+
+
+
