@@ -3,11 +3,20 @@ import { Container, ContainerHeader, Logo, ContainerBody, Or, Line } from "./sty
 
 import { useHistory } from "react-router-dom";
 
+import { WINDOW_SIZES } from "@/variables";
+
 import EloquentButton from "@/components/pageComponents/form/EloquentButton";
 import EloquentInput from "@/components/pageComponents/form/EloquentInput";
 import CloseButton from "@/components/pageComponents/form/CloseButton";
 
 export default function UserStart() {
+	if (window.electron) {
+		window.electron.setSize(
+			WINDOW_SIZES.SMALL.LOGIN_WINDOW_WIDTH,
+			WINDOW_SIZES.SMALL.LOGIN_WINDOW_HEIGHT,
+			true
+		);
+	}
 	const { t } = useTranslation();
 	let history = useHistory();
 

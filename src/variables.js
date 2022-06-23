@@ -1,5 +1,3 @@
-export const FONTSIZE_5 = "20px";
-
 export const COLORS = {
     ELOQUENT_ORANGE    : "#EF782E",
     ELOQUENT_WHITE     : "#EBFEFF",
@@ -8,15 +6,21 @@ export const COLORS = {
     ELOQUENT_LIGHTBLUE : "#758BFD",
     ELOQUENT_GRAY      : "#C4C4C4",
     ELOQUENT_RED       : "#FF0000"
-}
+}; // end of COLORS
 
 export const WINDOW_SIZES = {
-	LOGIN_WINDOW_WIDTH: 400,
-	LOGIN_WINDOW_HEIGHT: 526,
-	MAIN_WINDOW_WIDTH: 1386,
-	MAIN_WINDOW_HEIGHT: 724,
-};
+	SMALL: { LOGIN_WINDOW_WIDTH: 400, LOGIN_WINDOW_HEIGHT: 526 },
+	BIG: { MAIN_WINDOW_WIDTH: 1386, MAIN_WINDOW_HEIGHT: 724 }
+}; // end of WINDOW_SIZES
 
-
-
+export const TRANSCRIPTION_CONTAINER_SIZES = {
+    BIG: {
+        WIDTH: "1330px",
+        HEIGHT: "46px"
+    },
+    SMALL: {
+        WIDTH: "792px",
+        HEIGHT: "46px"
+    }
+} // end of TRANSCRIPTION_WINDOW_SIZES
 

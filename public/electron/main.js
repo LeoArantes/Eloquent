@@ -6,7 +6,7 @@ const isDev = require("electron-is-dev");
 
 require("@electron/remote/main").initialize();
 
-//process.env.NODE_ENV = "dev";
+process.env.NODE_ENV = "dev";
 
 let win = null;
 function createWindow() {

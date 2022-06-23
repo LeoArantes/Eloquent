@@ -9,5 +9,18 @@ contextBridge.exposeInMainWorld("electron", {
 	},
 	CloseWindow: () => {
 		ipcRenderer.send("close-window");
-	}
+	},
+	StartListening: () => {
+		ipcRenderer.send("start-listening");
+	},
+	StopListening: () => {
+		ipcRenderer.send("stop-listening");
+	},
+	EmotionAnalyzer: (callback) => {
+		// Deliberately strip event as it includes `sender`
+		ipcRenderer.on("emotion-analyzer-output", (event, ...args) => {
+			console.log(args);
+			callback(...args);
+		});
+	},
 });

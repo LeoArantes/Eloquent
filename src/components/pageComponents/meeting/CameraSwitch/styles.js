@@ -13,7 +13,6 @@ export const Container = styled.button`
     background-repeat: no-repeat;
 
 	${(props) => {
-		console.log(props.cameraState);
 		switch (props.cameraState) {
 			case "on":
 				return `background-image: url(${CameraOn});

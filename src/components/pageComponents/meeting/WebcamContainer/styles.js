@@ -11,7 +11,7 @@ export const Container = styled.div`
 	width: 310px;
 	left: 0px;
 	border: solid ${COLORS.ELOQUENT_DARKBLUE};
-	border-width: 3px 3px 3px 10px;
+	border-width: 3px 3px 3px 7px;
 	border-radius: 0px 27px 27px 0px;
 	background: url(${Logo128x128}) ${COLORS.ELOQUENT_BLUE} no-repeat center;
 	overflow: hidden;

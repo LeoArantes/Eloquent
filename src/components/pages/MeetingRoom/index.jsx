@@ -7,6 +7,7 @@ import {
 	EndCallContainer,
 	ChatContainer,
 } from "./styles";
+
 import { WINDOW_SIZES } from '@/variables'
 
 import MeetingHeader from "@/components/pageComponents/meeting/MeetingHeader";
@@ -16,16 +17,19 @@ import CameraSwitch from '@/components/pageComponents/meeting/CameraSwitch';
 import MicSwitch from '@/components/pageComponents/meeting/MicSwitch';
 import EndCallSwitch from '@/components/pageComponents/meeting/EndCallSwitch';
 import ChatSwitch from '@/components/pageComponents/meeting/ChatSwitch';
+import UsersContainer from '@/components/pageComponents/meeting/UsersContainer';
+import TranscriptionContainer from '@/components/pageComponents/meeting/TranscriptionContainer';
 
 export default function MeetingRoom() {
     if (window.electron) {
-        window.electron.setSize(WINDOW_SIZES.MAIN_WINDOW_WIDTH, WINDOW_SIZES.MAIN_WINDOW_HEIGHT, true);
+        window.electron.setSize(WINDOW_SIZES.BIG.MAIN_WINDOW_WIDTH, WINDOW_SIZES.BIG.MAIN_WINDOW_HEIGHT, true);
     }
     //const { t } = useTranslation();
     const [cameraState,  setCameraState]   = useState("off");
     const [micState,     setMicState]      = useState("off");
     const [endCallState, setEndCallState]  = useState("active");
     const [chatState,    setChatState]     = useState("active");
+    const [transcriptionState,   setTranscriptionState]    = useState("full");
 
     const onCameraClick = () => {
         if (cameraState === "off") {
@@ -40,9 +44,16 @@ export default function MeetingRoom() {
         if (micState === "off") {
             console.log("alo");
             setMicState("on");
+
+            if (window.electron) {
+                window.electron.StartListening();
+            }
         }
         else {
             setMicState("off");
+            if (window.electron) {
+                window.electron.StopListening();
+            }
         }
     }
 
@@ -51,15 +62,20 @@ export default function MeetingRoom() {
     }
 
     const onChatClick = () => {
-        //TODO: chat
+        if (transcriptionState === "full") {
+            setTranscriptionState("minimized");
+        }
+        else {
+            setTranscriptionState("full");
+        }
     }
-
-
 
     return (
 		<MainContainer>
 			<MeetingHeader />
 			<WebcamContainer isWebcamOn={cameraState === "on" ? true : false} />
+			<UsersContainer />
+			<TranscriptionContainer Size={transcriptionState} />
 
 			<FooterContainer>
 				<PersonalControlContainer>
@@ -70,7 +86,7 @@ export default function MeetingRoom() {
 					<EndCallSwitch endCallState={endCallState} />
 				</EndCallContainer>
 				<ChatContainer>
-					<ChatSwitch chatState={chatState} />
+					<ChatSwitch chatState={chatState} onClick={() => onChatClick()}/>
 				</ChatContainer>
 			</FooterContainer>
 		</MainContainer>

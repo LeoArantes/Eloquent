@@ -17,11 +17,12 @@ export const ContainerHeader = styled.div`
 	height: 192px;
 	width: 100%;
 	display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 25px;
-    color: ${COLORS.ELOQUENT_WHITE};
-
+	align-items: center;
+	justify-content: center;
+	font-size: 25px;
+	color: ${COLORS.ELOQUENT_WHITE};
+	-webkit-user-select: none !important;
+	-webkit-app-region: drag !important;
 `;
 
 export const ContainerBody = styled.div`

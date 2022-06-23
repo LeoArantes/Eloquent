@@ -1,14 +1,14 @@
+import { useHistory } from "react-router-dom";
 import { MainContainer } from "./styles";
+
+
 import RoomCodeContainer from "../RoomCodeContainer";
 import CloseButton from "../../form/CloseButton";
 
 export default function MeetingHeader() {
-
+	const history = useHistory();
     const onCloseClick = () => {
-		if (!window.electron) {
-			return;
-		}
-		window.electron.CloseWindow();
+		history.push("/");
 	};
     return (
 		<MainContainer>

@@ -12,24 +12,36 @@ export const MainContainer = styled.div`
 `;
 
 export const FooterContainer = styled.div`
-    padding: 8px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-
-
+	padding: 4px 20px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 88px;
 `;
 
 export const PersonalControlContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 150px;
+    width: 12%;
 `;
-export const EndCallContainer = styled.div``;
-export const ChatContainer = styled.div``;
+export const EndCallContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 76%;
+`;
+export const ChatContainer = styled.div`
+	margin: 0px;
+	padding: 0px;
+	width: 72px;
+	height: 72px;
+	width: 12%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+`;

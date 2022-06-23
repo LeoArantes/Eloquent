@@ -15,7 +15,6 @@ export const Container = styled.button`
 	background-repeat: no-repeat;
 
 	${(props) => {
-		console.log(props.micState);
 		switch (props.micState) {
 			case "off":
 				return `background-image: url(${MicOff});

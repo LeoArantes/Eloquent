@@ -15,7 +15,6 @@ export const Container = styled.button`
 	background-image: url(${Phone});
 
 	${(props) => {
-		console.log(props.endCallState);
 		switch (props.endCallState) {
 			case "active":
 				return `background-color: ${COLORS.ELOQUENT_RED};`;

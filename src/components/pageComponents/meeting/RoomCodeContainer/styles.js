@@ -12,10 +12,10 @@ export const MainContainer = styled.div`
 	height: 50px;
 	padding: 2px 18px;
 	display: flex;
-	justify-content: center;
+	justify-content: space-around;
 	align-items: center;
 	color: ${COLORS.ELOQUENT_WHITE};
 	font-size: 27px;
-	font-weight: "bold";
+	font-weight: 800;
 `;
 

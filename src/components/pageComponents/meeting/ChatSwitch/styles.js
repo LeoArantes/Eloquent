@@ -15,7 +15,6 @@ export const Container = styled.button`
 	background-image: url(${Chat});
 
 	${(props) => {
-		console.log(props.chatState);
 		switch (props.chatState) {
 			case "active":
 				return `background-color: ${COLORS.ELOQUENT_LIGHTBLUE};`;

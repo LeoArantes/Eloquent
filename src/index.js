@@ -1,5 +1,5 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import { StrictMode } from "react";
+import {render} from "react-dom";
 import i18next from "i18next";
 import { initReactI18next } from "react-i18next";
 import HttpApi from "i18next-http-backend";
@@ -28,11 +28,11 @@ i18next
 		backend: {
 			loadPath: "./assets/locales/{{lng}}/translation.json",
 		},
-	});
+	}); 
 
-ReactDOM.render(
-	<React.StrictMode>
+render(
+	<StrictMode>
 		<App />
-	</React.StrictMode>,
+	</StrictMode>,
 	document.getElementById("root")
 );
