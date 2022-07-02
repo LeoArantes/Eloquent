@@ -16,7 +16,8 @@ export const Container = styled.button`
 
 	${(props) => {
 		switch (props.chatState) {
-			case "active":
+			case "visible":
+			case "hidden":
 				return `background-color: ${COLORS.ELOQUENT_LIGHTBLUE};`;
 			case "disabled":
 			default:

@@ -8,7 +8,6 @@ function initIpcMainListeners(window) {
 	win = window;
 	sentimentAnalyzer = new SentimentAnalyzer();
 
-
 	ipcMain.on("say-hello", () => {
 		console.log("hello");
 	});
@@ -18,10 +17,14 @@ function initIpcMainListeners(window) {
 	});
 
 	ipcMain.on("set-size", (event, { width, height, recenter }) => {
+		if ((width === win.getSize()[0]) && (height === win.getSize()[1])) return;
+
+		win.hide();
 		win.setSize(width, height);
 		win.setMinimumSize(width, height);
 
 		if (recenter) win.center();
+		setTimeout(() => win.show(), 50);
 	});
 
 	ipcMain.on("start-listening", () => {

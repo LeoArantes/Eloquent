@@ -1,15 +1,13 @@
+import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { Container, ContainerHeader, Logo, ContainerBody, Or, Line } from "./styles";
 
-import { useHistory } from "react-router-dom";
-
 import { WINDOW_SIZES } from "@/variables";
 
-import EloquentButton from "@/components/pageComponents/form/EloquentButton";
-import EloquentInput from "@/components/pageComponents/form/EloquentInput";
-import CloseButton from "@/components/pageComponents/form/CloseButton";
+import { EloquentButton, EloquentInput, CloseButton } from "@components/form/";
 
-export default function UserStart() {
+export default function UserStart({history}) {
+	console.log("Entering UserStart");
 	if (window.electron) {
 		window.electron.setSize(
 			WINDOW_SIZES.SMALL.LOGIN_WINDOW_WIDTH,
@@ -18,21 +16,21 @@ export default function UserStart() {
 		);
 	}
 	const { t } = useTranslation();
-	let history = useHistory();
 
-	const onCloseClick = () => {
-		if (!window.electron) {
-			return;
-		}
-		window.electron.CloseWindow();
-	};
+	const onCloseClick = useCallback(() => {
+		if (window.electron) window.electron.CloseWindow()
+	}, []);
 
-	const onJoinClick = () => {
+	const onJoinClick = useCallback(() => {
+		// TODO: join meeting
+		// - Validate meeting id
 		history.push("/MeetingRoom");
-	}
-	const onCreateRoomClick = () => {
+	}, [history]);
+
+	const onCreateRoomClick = useCallback(() => {
+		// TODO: create meeting
 		history.push("/MeetingRoom");
-	}
+	}, [history]);
 
 	return (
 		<Container>
@@ -42,7 +40,7 @@ export default function UserStart() {
 			</ContainerHeader>
 			<ContainerBody>
 				<div>{t("insertRoomCode")}</div>
-				<EloquentInput placeholder={t("RoomCode")} />
+				<EloquentInput Placeholder={t("RoomCode")} />
 				<EloquentButton
 					text={t("Join")}
 					ButtonTheme="Orange"

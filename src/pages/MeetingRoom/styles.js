@@ -35,13 +35,13 @@ export const EndCallContainer = styled.div`
     align-items: center;
     width: 76%;
 `;
-export const ChatContainer = styled.div`
+export const ChatButtonContainer = styled.div`
 	margin: 0px;
 	padding: 0px;
 	width: 72px;
 	height: 72px;
 	width: 12%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
 `;

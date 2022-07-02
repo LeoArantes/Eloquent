@@ -3,7 +3,7 @@ import { MainContainer } from "./styles";
 
 
 import RoomCodeContainer from "../RoomCodeContainer";
-import CloseButton from "../../form/CloseButton";
+import CloseButton from "../../../form/CloseButton";
 
 export default function MeetingHeader() {
 	const history = useHistory();

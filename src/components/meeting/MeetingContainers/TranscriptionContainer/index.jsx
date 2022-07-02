@@ -6,7 +6,6 @@ function TranscriptionContainer({Size}) {
 
   if (window.electron) {
     window.electron.EmotionAnalyzer((args) => {
-      console.log(args);
       setText(args);
     });
   }

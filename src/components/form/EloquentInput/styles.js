@@ -16,6 +16,7 @@ export const InputContainer = styled.input`
 	padding: 0px 10px;
 	margin: 10px 0px;
 	outline: none;
+	placeholder-color: ${COLORS.ELOQUENT_DARKBLUE};
 	&:focus {
 		outline: none;
 	}

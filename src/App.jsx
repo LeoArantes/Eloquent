@@ -1,7 +1,7 @@
 import { Route, HashRouter as Router, Switch } from "react-router-dom";
 
-import MeetingRoom from "./components/pages/MeetingRoom";
-import UserStart from "./components/pages/UserStart";
+import MeetingRoom from "@/pages/MeetingRoom";
+import UserStart from "@/pages/UserStart";
 
 function App() {
 	return (

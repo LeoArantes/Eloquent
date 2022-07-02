@@ -11,6 +11,7 @@ process.env.NODE_ENV = "dev";
 let win = null;
 function createWindow() {
 	win = new BrowserWindow({
+		icon: path.join(__dirname, "../../src/assets/images/Logo-64x64.png"),
 		width: 		400,
 		minWidth: 	400,
 		height: 	526,

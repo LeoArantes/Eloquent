@@ -19,7 +19,6 @@ contextBridge.exposeInMainWorld("electron", {
 	EmotionAnalyzer: (callback) => {
 		// Deliberately strip event as it includes `sender`
 		ipcRenderer.on("emotion-analyzer-output", (event, ...args) => {
-			console.log(args);
 			callback(...args);
 		});
 	},
