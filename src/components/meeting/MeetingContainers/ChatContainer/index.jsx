@@ -12,6 +12,31 @@ const mockData = [
 		sender: "John Doe",
 		time: "12:00",
 		type: "sent",
+	},
+	{
+		message: "fuck you",
+		sender: "Jane Doe",
+		time: "12:01",
+		type: "received",
+	},
+	{
+		message: "Hello",
+		sender: "John Doe",
+		time: "12:02",
+		type: "sent",
+	},
+	{
+		message: "fuck you",
+		sender: "Jane Doe",
+		time: "12:03",
+		type: "received",
+	},
+	{
+		message:
+			"fuck you againfuck you againfuck you againfuck you againfuck you againfuck you againfuck you againfuck you again",
+		sender: "Jane Doe",
+		time: "12:03",
+		type: "received",
 	}
 ];
 
