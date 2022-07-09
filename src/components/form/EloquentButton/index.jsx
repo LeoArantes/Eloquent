@@ -2,6 +2,7 @@ import { EloquentButtonStyle } from "./styles.js";
 
 export default function EloquentButton({
 	text,
+	type,
 	onClick,
 	ButtonTheme,
 	Margin,
@@ -21,6 +22,7 @@ export default function EloquentButton({
 			FontWeight={FontWeight}
 			Width={Width}
 			Height={Height}
+			type={type}
 		>
 			{text}
 		</EloquentButtonStyle>

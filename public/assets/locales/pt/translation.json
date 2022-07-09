@@ -7,5 +7,7 @@
 	"CreateRoom": "Criar sala",
 	"Room": "Sala",
 	"or": "ou",
-	"ChatRoom": "Bate-papo"
+	"ChatRoom": "Bate-papo",
+	"InsertNameToEnter": "Para entrar na reunião digite seu nome:",
+	"Confirm": "Confirmar"
 }

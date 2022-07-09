@@ -11,7 +11,7 @@ export const MainContainer = styled.div`
     background-color: ${COLORS.ELOQUENT_DARKBLUE};
 `;
 
-export const FooterContainer = styled.div`
+export const ControllersContainer = styled.div`
 	padding: 4px 20px;
 	display: flex;
 	justify-content: space-between;

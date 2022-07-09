@@ -1,14 +1,11 @@
 import { useState, useCallback } from "react";
-// import { useTranslation } from 'react-i18next'
 import {
 	MainContainer,
-	FooterContainer,
+	ControllersContainer,
 	PersonalControlContainer,
 	EndCallContainer,
 	ChatButtonContainer,
 } from "./styles";
-
-import { WINDOW_SIZES } from "@/variables";
 
 import {
 	MeetingHeader,
@@ -19,8 +16,12 @@ import {
 	ChatSwitch,
 	UsersContainer,
 	TranscriptionContainer,
-	ChatContainer
+	ChatContainer,
+	InsertNameModal,
 } from "@components/meeting";
+
+import { UserContext } from "@/contexts/UserContext";
+import { WINDOW_SIZES } from "@/variables";
 
 export default function MeetingRoom() {
 	console.log("Entering MeetingRoom");
@@ -31,11 +32,15 @@ export default function MeetingRoom() {
 			true
 		);
 	}
-	//const { t } = useTranslation();
-	const [cameraState, setCameraState] = useState("off");
-	const [chatState, setChatState] = useState("hidden");
-	const [endCallState, setEndCallState] = useState("active");
-	const [transcriptionState, setTranscriptionState] = useState("full");
+
+	const [showInsertNameModal, setShowInsertNameModal] = useState(true);
+	const [userName, setUserName] = useState("");
+
+	const [micState, 			setMicState] 			= useState("disabled");
+	const [cameraState, 		setCameraState] 		= useState("disabled");
+	const [chatState, 			setChatState] 			= useState("disabled");
+	const [endCallState, 		setEndCallState] 		= useState("disabled");
+	const [transcriptionState, 	setTranscriptionState] 	= useState("full");
 
 	const onCameraClick = useCallback(() => {
 		setCameraState(cameraState === "off" ? "on" : "off");
@@ -44,28 +49,54 @@ export default function MeetingRoom() {
 		setTranscriptionState(transcriptionState === "full" ? "minimized" : "full");
 		setChatState(chatState === "visible" ? "hidden" : "visible");
 	}, [transcriptionState, chatState]);
-	const onEndCallClick = useCallback(() => { /*TODO*/ }, [endCallState]);
+
+	const handleSubmitName = useCallback((name) => {
+		setUserName(name);
+		setShowInsertNameModal(false)
+
+		setMicState("off");
+		setCameraState("off");
+		setChatState("hidden");
+		setEndCallState("active");
+		setTranscriptionState("full");
+	},[]);
 
 	return (
 		<MainContainer>
-			<MeetingHeader />
+			<UserContext.Provider
+				value={{
+					userName,
+					showInsertNameModal,
+					handleSubmit: handleSubmitName,
+				}}
+			>
+				<InsertNameModal />
+				<MeetingHeader />
+			</UserContext.Provider>
+
 			<WebcamContainer isWebcamOn={cameraState === "on" ? true : false} />
-			<UsersContainer />
 			<TranscriptionContainer Size={transcriptionState} />
+			<UsersContainer />
 			<ChatContainer chatState={chatState} />
 
-			<FooterContainer>
+			<ControllersContainer>
 				<PersonalControlContainer>
-					<CameraSwitch cameraState={cameraState} onClick={() => onCameraClick()} />
-					<MicSwitch />
+					<CameraSwitch
+						cameraState={cameraState}
+						onClick={() => onCameraClick()}
+					/>
+					<MicSwitch micState={micState} />
 				</PersonalControlContainer>
 				<EndCallContainer>
 					<EndCallSwitch endCallState={endCallState} />
 				</EndCallContainer>
 				<ChatButtonContainer>
-					<ChatSwitch chatState={chatState} onClick={() => onChatClick()} />
+					<ChatSwitch
+						chatState={chatState}
+						onClick={() => onChatClick()}
+					/>
 				</ChatButtonContainer>
-			</FooterContainer>
+			</ControllersContainer>
 		</MainContainer>
 	);
 }

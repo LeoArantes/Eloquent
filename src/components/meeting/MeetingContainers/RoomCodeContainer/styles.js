@@ -7,8 +7,8 @@ export const MainContainer = styled.div`
 	position: absolute;
 	top: 0;
 	left: 0;
-	width: 277px;
-	border-radius: 0 0 6px 0;
+	width: 310px;
+	border-radius: 0 0 10px 0;
 	height: 50px;
 	padding: 2px 18px;
 	display: flex;

@@ -14,26 +14,19 @@ const mockData = [
 		type: "sent",
 	},
 	{
-		message: "fuck you",
+		message: "Hey there",
 		sender: "Jane Doe",
 		time: "12:01",
 		type: "received",
 	},
 	{
-		message: "Hello",
+		message: "How are you?",
 		sender: "John Doe",
 		time: "12:02",
 		type: "sent",
 	},
 	{
-		message: "fuck you",
-		sender: "Jane Doe",
-		time: "12:03",
-		type: "received",
-	},
-	{
-		message:
-			"fuck you againfuck you againfuck you againfuck you againfuck you againfuck you againfuck you againfuck you again",
+		message: "I'm fine, thanks",
 		sender: "Jane Doe",
 		time: "12:03",
 		type: "received",
@@ -68,7 +61,7 @@ export default function ChatContainer({ chatState }) {
 	return (
 		<Container chatState={chatState}>
 			<ChatHeader>{t("ChatRoom")}</ChatHeader>
-			<ChatBody scrollTop={10000}>
+			<ChatBody>
 				{chatMessages
 					.slice(0)
 					.reverse()
