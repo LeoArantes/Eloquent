@@ -34,6 +34,7 @@
 		"wait-on": "^5.3.0"
 	},
 	"main": "public/electron/main.js",
+	"icon": "src/assets/images/Logo-360x360.png",
 	"homepage": "./",
 	"scripts": {
 		"start": "concurrently -k \"cross-env BROWSER=none npm run react:start\" \"npm run electron:start\"",
@@ -50,9 +51,9 @@
 	},
 	"build": {
 		"extends": null,
-		"productName": "AppName",
-		"appId": "br.com.appname",
-		"icon": "",
+		"productName": "Eloquent",
+		"appId": "br.com.Eloquent",
+		"icon": "src/assets/images/Logo-360x360.png",
 		"files": [
 			"dist/**/*",
 			"build/**/*",
@@ -68,13 +69,20 @@
 				"filter": [
 					"**/*"
 				]
+			},
+			{
+				"from": "public/python/",
+				"to": "python/",
+				"filter": [
+					"**/*"
+				]
 			}
 		],
 		"directories": {
 			"buildResources": "assets"
 		},
 		"win": {
-			"icon": "build/icon.png",
+			"icon": "src/assets/images/Logo-360x360.png",
 			"artifactName": "${productName}-${version}-Setup.${ext}",
 			"target": [
 				{

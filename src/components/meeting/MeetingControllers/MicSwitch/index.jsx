@@ -1,14 +1,7 @@
 import { useCallback } from "react";
 import { Container } from "./styles";
 
-export default function MicSwitch({ micState }) {
-	const onMicClick = useCallback(() => {
-		if (micState === "off") {
-			if (window.electron) window.electron.StartListening();
-		} else {
-			if (window.electron) window.electron.StopListening();
-		}
-	}, [micState]);
+export default function MicSwitch({ micState, onMicClick }) {
 
 	return (
 		<Container

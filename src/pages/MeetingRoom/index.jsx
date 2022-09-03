@@ -42,6 +42,15 @@ export default function MeetingRoom() {
 	const [endCallState, 		setEndCallState] 		= useState("disabled");
 	const [transcriptionState, 	setTranscriptionState] 	= useState("full");
 
+	const onMicClick = useCallback(() => {
+		if (micState === "off") {
+			if (window.electron) window.electron.StartListening();
+			setMicState("on");
+		} else {
+			if (window.electron) window.electron.StopListening();
+			setMicState("off");
+		}
+	}, [micState]);
 	const onCameraClick = useCallback(() => {
 		setCameraState(cameraState === "off" ? "on" : "off");
 	}, [cameraState]);
@@ -85,7 +94,10 @@ export default function MeetingRoom() {
 						cameraState={cameraState}
 						onClick={() => onCameraClick()}
 					/>
-					<MicSwitch micState={micState} />
+					<MicSwitch
+						micState={micState}
+						onMicClick={() => onMicClick()}
+					/>
 				</PersonalControlContainer>
 				<EndCallContainer>
 					<EndCallSwitch endCallState={endCallState} />

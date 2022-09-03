@@ -19,13 +19,18 @@ export default function InsertNameModal() {
 	return (
 		<Container show={showInsertNameModal}>
 			<h1>{t("InsertNameToEnter")}</h1>
-			<form onSubmit={() => onSendMessage()}>
+			<form onSubmit={(e) => {
+				e.preventDefault()
+				onSendMessage()
+				}}>
 				<EloquentInput
 					Placeholder={"Escreva seu nome..."}
 					Width={"300px"}
 					TextAlign={"center"}
 					value={inputValue}
-					onInput={(e) => setInputValue(e.target.value)}
+					onInput={(e) => {
+						setInputValue(e.target.value)
+					}}
 				/>
 				<EloquentButton
 					type={"submit"}
