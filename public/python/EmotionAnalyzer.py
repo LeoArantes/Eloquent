@@ -1,4 +1,4 @@
-from time import sleep
+#from time import sleep
 from leia import SentimentIntensityAnalyzer
 import speech_recognition as sr
 import os
@@ -23,7 +23,7 @@ def read_file(file_name):
                 elif (v["compound"] > -0.05) and (v["compound"] < 0.05):
                     print(f"{line}(SENTIMENTO NEUTRO)", end='')
 
-            sleep(5)
+            #sleep(5)
 
 
 def hear_me():
