@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { MainContainer, UserNameContainer } from "./styles";
 import { UserContext } from "@/contexts/UserContext";
 import RoomCodeContainer from "../RoomCodeContainer";
@@ -7,9 +7,9 @@ import CloseButton from "../../../form/CloseButton";
 
 export default function MeetingHeader() {
 	const { userName } = useContext(UserContext);
-	const history = useHistory();
+	const navigate = useNavigate();
     const onCloseClick = () => {
-		history.push("/");
+		navigate("/");
 	};
     return (
 		<MainContainer>

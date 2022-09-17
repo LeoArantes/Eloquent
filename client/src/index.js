@@ -1,5 +1,5 @@
 import { StrictMode } from "react";
-import {render} from "react-dom";
+import {createRoot} from "react-dom/client";
 import i18next from "i18next";
 import { initReactI18next } from "react-i18next";
 import HttpApi from "i18next-http-backend";
@@ -30,9 +30,9 @@ i18next
 		},
 	}); 
 
-render(
+const rootElement = document.getElementById("root");
+createRoot(rootElement).render(
 	<StrictMode>
 		<App />
-	</StrictMode>,
-	document.getElementById("root")
+	</StrictMode>
 );

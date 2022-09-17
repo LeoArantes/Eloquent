@@ -1,10 +1,10 @@
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Container } from "./styles";
 
 export default function EndCallSwitch({ endCallState }) {
-	const history = useHistory();
+	const navigate = useNavigate();
 	const onCloseClick = () => {
-		history.push("/");
+		navigate("/");
 	};
 	return (
 		<Container

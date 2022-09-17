@@ -1,12 +1,13 @@
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { Container, ContainerHeader, Logo, ContainerBody, Or, Line } from "./styles";
+import { useNavigate } from "react-router-dom";
 
 import { WINDOW_SIZES } from "@/variables";
 
 import { EloquentButton, EloquentInput, CloseButton } from "@components/form/";
 
-export default function UserStart({history}) {
+export default function UserStart() {
 	console.log("Entering UserStart");
 	if (window.electron) {
 		window.electron.setSize(
@@ -15,7 +16,8 @@ export default function UserStart({history}) {
 			true
 		);
 	}
-	const { t } = useTranslation();
+	const { t } = useTranslation(); 
+	const navigate = useNavigate();
 
 	const onCloseClick = useCallback(() => {
 		if (window.electron) window.electron.CloseWindow()
@@ -24,13 +26,13 @@ export default function UserStart({history}) {
 	const onJoinClick = useCallback(() => {
 		// TODO: join meeting
 		// - Validate meeting id
-		history.push("/MeetingRoom");
-	}, [history]);
+		navigate("/MeetingRoom");
+	}, [navigate]);
 
 	const onCreateRoomClick = useCallback(() => {
 		// TODO: create meeting
-		history.push("/MeetingRoom");
-	}, [history]);
+		navigate("/MeetingRoom");
+	}, [navigate]);
 
 	return (
 		<Container>
