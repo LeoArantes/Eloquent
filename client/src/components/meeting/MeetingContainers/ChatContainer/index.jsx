@@ -1,9 +1,10 @@
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Container, ChatHeader, ChatBody, ChatFooter } from "./styles";
 import { EloquentInput } from "@/components/form";
 import ChatMessage from "./ChatMessage";
 import SendMessageButton from "@/components/meeting/MeetingControllers/SendMessageButton";
+import { sendMessage } from "@/hooks/room";
 
 //TODO: remove this mock data
 const mockData = [
@@ -36,15 +37,23 @@ const mockData = [
 export default function ChatContainer({ chatState }) {
 	const { t } = useTranslation();
 
+
 	const [inputValue, setInputValue] = useState("");
 	const [chatMessages, setChatMessages] = useState(mockData);
 
-	const onSendMessage = useCallback(() => {
+	const onSendMessage = (e) => {
+		e.preventDefault();
 		if (inputValue.length <= 0) return;
 
 		var current = new Date();
 		var time = current.getHours() + ":" + current.getMinutes();
 
+		sendMessage({
+			message: inputValue,
+			sender: "John Doe",
+			time: time,
+			type: "sent",
+		});
 		setChatMessages([
 			...chatMessages,
 			{
@@ -55,9 +64,8 @@ export default function ChatContainer({ chatState }) {
 			},
 		]);
 		setInputValue("");
-	}, [chatMessages, inputValue]);
+	};
 
-	// TODO: Implement the chat
 	return (
 		<Container chatState={chatState}>
 			<ChatHeader>{t("ChatRoom")}</ChatHeader>
@@ -70,7 +78,7 @@ export default function ChatContainer({ chatState }) {
 					))}
 			</ChatBody>
 			<ChatFooter>
-				<form onSubmit={() => onSendMessage()}>
+				<form onSubmit={(e) => onSendMessage(e)}>
 					<EloquentInput
 						Placeholder={"Escreva sua mensagem..."}
 						Width={"423px"}

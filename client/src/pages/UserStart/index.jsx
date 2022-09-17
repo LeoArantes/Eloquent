@@ -1,9 +1,10 @@
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Container, ContainerHeader, Logo, ContainerBody, Or, Line } from "./styles";
 import { useNavigate } from "react-router-dom";
 
+import { Container, ContainerHeader, Logo, ContainerBody, Or, Line } from "./styles";
 import { WINDOW_SIZES } from "@/variables";
+import { joinRoom } from "@/hooks/room";
 
 import { EloquentButton, EloquentInput, CloseButton } from "@components/form/";
 
@@ -19,15 +20,16 @@ export default function UserStart() {
 	const { t } = useTranslation(); 
 	const navigate = useNavigate();
 
+	const [roomCode, setRoomCode] = useState("");
+
 	const onCloseClick = useCallback(() => {
 		if (window.electron) window.electron.CloseWindow()
 	}, []);
 
 	const onJoinClick = useCallback(() => {
-		// TODO: join meeting
-		// - Validate meeting id
+		joinRoom(roomCode);
 		navigate("/MeetingRoom");
-	}, [navigate]);
+	}, [navigate, roomCode]);
 
 	const onCreateRoomClick = useCallback(() => {
 		// TODO: create meeting
@@ -42,7 +44,11 @@ export default function UserStart() {
 			</ContainerHeader>
 			<ContainerBody>
 				<div>{t("insertRoomCode")}</div>
-				<EloquentInput Placeholder={t("RoomCode")} />
+				<EloquentInput
+					Placeholder={t("RoomCode")}
+					value={roomCode}
+					onInput={(e) => setRoomCode(e.target.value)}
+				/>
 				<EloquentButton
 					text={t("Join")}
 					ButtonTheme="Orange"
