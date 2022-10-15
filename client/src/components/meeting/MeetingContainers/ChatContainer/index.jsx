@@ -1,45 +1,31 @@
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { Container, ChatHeader, ChatBody, ChatFooter } from "./styles";
 import { EloquentInput } from "@/components/form";
 import ChatMessage from "./ChatMessage";
 import SendMessageButton from "@/components/meeting/MeetingControllers/SendMessageButton";
-import { sendMessage } from "@/hooks/room";
-
-//TODO: remove this mock data
-const mockData = [
-	{
-		message: "Hello",
-		sender: "John Doe",
-		time: "12:00",
-		type: "sent",
-	},
-	{
-		message: "Hey there",
-		sender: "Jane Doe",
-		time: "12:01",
-		type: "received",
-	},
-	{
-		message: "How are you?",
-		sender: "John Doe",
-		time: "12:02",
-		type: "sent",
-	},
-	{
-		message: "I'm fine, thanks",
-		sender: "Jane Doe",
-		time: "12:03",
-		type: "received",
-	}
-];
+import { getSocket, getRoomCode } from "@/hooks/room";
+import { UserContext } from "@/contexts/UserContext";
 
 export default function ChatContainer({ chatState }) {
 	const { t } = useTranslation();
-
+	const { userName } = useContext(UserContext);
 
 	const [inputValue, setInputValue] = useState("");
-	const [chatMessages, setChatMessages] = useState(mockData);
+	const [chatMessages, setChatMessages] = useState([]);
+
+	useEffect(() => {
+		getSocket().on("chat", (data) => {
+			if (data.sender !== userName) {
+				setChatMessages((prev) => [...prev, data]);
+			}
+		});
+
+		return () => {
+			setChatMessages([]);
+		};
+	}, [userName]);
+	
 
 	const onSendMessage = (e) => {
 		e.preventDefault();
@@ -48,21 +34,15 @@ export default function ChatContainer({ chatState }) {
 		var current = new Date();
 		var time = current.getHours() + ":" + current.getMinutes();
 
-		sendMessage({
-			message: inputValue,
-			sender: "John Doe",
-			time: time,
-			type: "sent",
-		});
-		setChatMessages([
-			...chatMessages,
-			{
+		getSocket().emit("chat", {
+			message: {
 				message: inputValue,
-				sender: "John Doe",
+				sender: userName,
 				time: time,
-				type: "sent",
 			},
-		]);
+			room: getRoomCode(),
+		});
+
 		setInputValue("");
 	};
 
@@ -71,7 +51,7 @@ export default function ChatContainer({ chatState }) {
 			<ChatHeader>{t("ChatRoom")}</ChatHeader>
 			<ChatBody>
 				{chatMessages
-					.slice(0)
+					?.slice(0)
 					.reverse()
 					.map((message, index) => (
 						<ChatMessage key={index} id={index} message={message} />

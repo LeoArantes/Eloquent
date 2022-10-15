@@ -81,12 +81,12 @@ export default function MeetingRoom() {
 			>
 				<InsertNameModal />
 				<MeetingHeader />
-			</UserContext.Provider>
 
-			<WebcamContainer isWebcamOn={cameraState === "on" ? true : false} />
-			<TranscriptionContainer Size={transcriptionState} />
-			<UsersContainer />
-			<ChatContainer chatState={chatState} />
+				<WebcamContainer isWebcamOn={cameraState === "on" ? true : false} />
+				<TranscriptionContainer Size={transcriptionState} />
+				<UsersContainer />
+				<ChatContainer chatState={chatState} />
+			</UserContext.Provider>
 
 			<ControllersContainer>
 				<PersonalControlContainer>

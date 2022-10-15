@@ -8,12 +8,10 @@ export const joinRoom = (room) => {
     socket.emit("join", room);
 }
 
-export const sendMessage = (message) => {
-    socket.emit("chat", { message, room: roomCode });
-};
+export const getSocket = () => {
+    return socket;
+}
 
-export const receiveMessage = (callback) => {
-    socket.on("chat", (message) => {
-        callback(message);
-    });
+export const getRoomCode = () => {
+    return roomCode;
 }
