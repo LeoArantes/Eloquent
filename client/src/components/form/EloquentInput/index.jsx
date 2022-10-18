@@ -5,6 +5,7 @@ export default function EloquentInput({
 	BorderColor,
 	BorderRadius,
 	Height,
+	Ref,
 	onInput,
 	Placeholder,
 	TextAlign,
@@ -17,6 +18,7 @@ export default function EloquentInput({
 			BorderColor={BorderColor}
 			BorderRadius={BorderRadius}
 			Height={Height}
+			ref={Ref}
 			onInput={onInput}
 			placeholder={Placeholder}
 			TextAlign={TextAlign}

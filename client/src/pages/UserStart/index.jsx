@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
@@ -19,22 +19,21 @@ export default function UserStart() {
 	}
 	const { t } = useTranslation(); 
 	const navigate = useNavigate();
+	const roomCode = useRef();
 
-	const [roomCode, setRoomCode] = useState("");
-
-	const onCloseClick = useCallback(() => {
+	const onCloseClick = () => {
 		if (window.electron) window.electron.CloseWindow()
-	}, []);
+	};
 
-	const onJoinClick = useCallback(() => {
-		joinRoom(roomCode);
+	const onJoinClick = () => {
+		joinRoom(roomCode.current.value);
 		navigate("/MeetingRoom");
-	}, [navigate, roomCode]);
+	};
 
-	const onCreateRoomClick = useCallback(() => {
+	const onCreateRoomClick = () => {
 		// TODO: create meeting
 		navigate("/MeetingRoom");
-	}, [navigate]);
+	};
 
 	return (
 		<Container>
@@ -46,8 +45,7 @@ export default function UserStart() {
 				<div>{t("insertRoomCode")}</div>
 				<EloquentInput
 					Placeholder={t("RoomCode")}
-					value={roomCode}
-					onInput={(e) => setRoomCode(e.target.value)}
+					Ref={roomCode}
 				/>
 				<EloquentButton
 					text={t("Join")}

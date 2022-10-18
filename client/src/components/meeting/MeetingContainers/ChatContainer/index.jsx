@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Container, ChatHeader, ChatBody, ChatFooter } from "./styles";
 import { EloquentInput } from "@/components/form";
@@ -10,40 +10,49 @@ import { UserContext } from "@/contexts/UserContext";
 export default function ChatContainer({ chatState }) {
 	const { t } = useTranslation();
 	const { userName } = useContext(UserContext);
+	const socketClientRef = useRef();
 
-	const [inputValue, setInputValue] = useState("");
+	const inputValue = useRef();
 	const [chatMessages, setChatMessages] = useState([]);
 
 	useEffect(() => {
-		getSocket().on("chat", (data) => {
-			if (data.sender !== userName) {
-				setChatMessages((prev) => [...prev, data]);
-			}
+		const client = getSocket();
+		client.on("chat", (messages) => {
+			console.log("Chat message received");
+			console.log(messages);
+			setChatMessages((currentChatMessages) => [
+				...currentChatMessages,
+				messages,
+			]);
 		});
-
-		return () => {
-			setChatMessages([]);
-		};
-	}, [userName]);
-	
+		socketClientRef.current = client;
+	}, []);
 
 	const onSendMessage = (e) => {
 		e.preventDefault();
-		if (inputValue.length <= 0) return;
+		if (inputValue.current.value.length <= 0) return;
 
 		var current = new Date();
-		var time = current.getHours() + ":" + current.getMinutes();
+		String(current.getMinutes()).padStart(2, "0");
+		var time =
+			String(current.getHours()).padStart(2, "0") +
+			":" +
+			String(current.getMinutes()).padStart(2, "0") +
+			":" +
+			String(current.getSeconds()).padStart(2, "0") +
+			"." +
+			String(current.getMilliseconds()).padStart(3, "0");
 
-		getSocket().emit("chat", {
+		socketClientRef.current.emit("chat", {
 			message: {
-				message: inputValue,
+				message: inputValue.current.value,
 				sender: userName,
 				time: time,
 			},
 			room: getRoomCode(),
 		});
 
-		setInputValue("");
+		inputValue.current.value = "";
 	};
 
 	return (
@@ -61,10 +70,9 @@ export default function ChatContainer({ chatState }) {
 				<form onSubmit={(e) => onSendMessage(e)}>
 					<EloquentInput
 						Placeholder={"Escreva sua mensagem..."}
+						Ref={inputValue}
 						Width={"423px"}
 						TextAlign={"left"}
-						value={inputValue}
-						onInput={(e) => setInputValue(e.target.value)}
 					/>
 					<SendMessageButton type="submit" />
 				</form>

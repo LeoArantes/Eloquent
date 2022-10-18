@@ -42,22 +42,29 @@ export default function MeetingRoom() {
 	const [endCallState, 		setEndCallState] 		= useState("disabled");
 	const [transcriptionState, 	setTranscriptionState] 	= useState("full");
 
-	const onMicClick = useCallback(() => {
-		if (micState === "off") {
-			if (window.electron) window.electron.StartListening();
-			setMicState("on");
-		} else {
-			if (window.electron) window.electron.StopListening();
-			setMicState("off");
-		}
-	}, [micState]);
-	const onCameraClick = useCallback(() => {
-		setCameraState(cameraState === "off" ? "on" : "off");
-	}, [cameraState]);
-	const onChatClick = useCallback(() => {
-		setTranscriptionState(transcriptionState === "full" ? "minimized" : "full");
-		setChatState(chatState === "visible" ? "hidden" : "visible");
-	}, [transcriptionState, chatState]);
+	const onMicClick = () => {
+		setMicState((currentMicState) =>{
+			if (currentMicState === "off") {
+				if (window.electron) window.electron.StartListening();
+			} else {
+				if (window.electron) window.electron.StopListening();
+			}
+			return currentMicState === "off" ? "on" : "off"
+		});
+	};
+	const onCameraClick = () => {
+		setCameraState((currentCameraState) =>
+			currentCameraState === "off" ? "on" : "off"
+		);
+	};
+	const onChatClick = () => {
+		setTranscriptionState((currentTranscriptionState) =>
+			currentTranscriptionState === "full" ? "minimized" : "full"
+		);
+		setChatState((currentChatState) =>
+			currentChatState === "visible" ? "hidden" : "visible"
+		);
+	};
 
 	const handleSubmitName = useCallback((name) => {
 		setUserName(name);
