@@ -19,7 +19,7 @@ export default function ChatContainer({ chatState }) {
 		const client = getSocket();
 		client.on("chat", (messages) => {
 			console.log("Chat message received");
-			console.log(messages);
+			//console.log(messages);
 			setChatMessages((currentChatMessages) => [
 				...currentChatMessages,
 				messages,
@@ -32,9 +32,9 @@ export default function ChatContainer({ chatState }) {
 		e.preventDefault();
 		if (inputValue.current.value.length <= 0) return;
 
-		var current = new Date();
+		let current = new Date();
 		String(current.getMinutes()).padStart(2, "0");
-		var time =
+		let time =
 			String(current.getHours()).padStart(2, "0") +
 			":" +
 			String(current.getMinutes()).padStart(2, "0") +

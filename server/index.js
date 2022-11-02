@@ -37,11 +37,16 @@ io.on('connection', (socket) => {
     });
 
 
-	socket.on("chat", (data) => {
-		const { message, room } = data;
+	socket.on("chat", ({ message, room }) => {
 		console.log(`msg: ${message}, room: ${room}`);
         console.log(message);
 		io.to(room).emit("chat", message);
+	});
+
+	socket.on("transcription", ({ message, room }) => {
+		console.log(`msg: ${message}, room: ${room}`);
+        console.log(message);
+		io.to(room).emit("transcription", message);
 	});
 });
 

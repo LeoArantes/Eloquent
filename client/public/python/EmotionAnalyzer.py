@@ -35,11 +35,11 @@ def hear_me():
     adjust_for_ambient_noise = recognizer.adjust_for_ambient_noise
 
     with sr.Microphone() as source:
-        log('Limpando ruidos do ambiente...')
+        # log('Limpando ruidos do ambiente...')
         adjust_for_ambient_noise(source, duration=1)
 
         while True:
-            log('Fale algo...\n')
+            # log('Fale algo...\n')
             recordedaudio = r_listen(source)
 
             try:

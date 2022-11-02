@@ -32,7 +32,7 @@ i18next
 
 const rootElement = document.getElementById("root");
 createRoot(rootElement).render(
-	<StrictMode>
+	//<StrictMode>
 		<App />
-	</StrictMode>
+	//</StrictMode>
 );

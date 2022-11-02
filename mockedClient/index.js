@@ -16,8 +16,17 @@ socket.on("disconnect", () => {
 });
 
 socket.on("chat", (msg) => {
-    console.log("MESSAGE RECEIVED:");
-    console.log(msg);
+    if (msg.sender !== "MOCK") {
+		console.log("MESSAGE RECEIVED:");
+		console.log(msg);
+	}
+});
+
+socket.on("transcription", (msg) => {
+    if (msg.sender !== "MOCK") {
+		console.log("TRANSCRIPTION RECEIVED:");
+		console.log(msg);
+	}
 });
 
 setInterval(() => {
@@ -39,4 +48,13 @@ setInterval(() => {
             },
             room: "123",
         });
+
+        socket.emit("transcription", {
+			message: {
+				transcription: "Oi amigo, tudo bem?(🙂) - " + time,
+				sender: "MOCK",
+				time: time,
+			},
+			room: "123",
+		});
 }, 5000);
